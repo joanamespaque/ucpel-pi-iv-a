@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana Tecnológica UCPel 2026 | 20 a 22 de outubro</title>
+  <meta name="description" content="Semana Tecnológica UCPel 2026: três dias de palestras, oficinas práticas e networking com profissionais de tecnologia, de 20 a 22 de outubro, no Campus I da UCPel, em Pelotas.">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#home">
+        <span class="brand__title">Semana Tecnológica</span>
+        <span class="brand__subtitle">UCPel 2026</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="visually-hidden">Abrir menu</span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="#about">Sobre</a></li>
+          <li><a class="main-nav__link" href="#schedule">Programação</a></li>
+          <li><a class="main-nav__link" href="#speakers">Palestrantes</a></li>
+          <li><a class="main-nav__link" href="#registration">Inscrições</a></li>
+          <li><a class="main-nav__link" href="#location">Localização</a></li>
+          <li><a class="main-nav__link" href="#contact">Contato</a></li>
+        </ul>
+        <a class="btn btn--cta main-nav__cta" href="#registration">Inscreva-se</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero / slideshow -->
+    <section class="hero" id="home" aria-label="Destaques do evento">
+      <div class="slideshow">
+        <ul class="slideshow__track">
+          <li class="slide is-active">
+            <div class="container slide__content">
+              <p class="slide__eyebrow">20 a 22 de outubro de 2026 · Campus I · Pelotas</p>
+              <h1 class="slide__title">Semana Tecnológica UCPel 2026</h1>
+              <p class="slide__text">Três dias de palestras, oficinas práticas e networking com quem constrói a tecnologia no Brasil.</p>
+              <a class="btn btn--cta btn--lg" href="#registration">Inscreva-se gratuitamente</a>
+            </div>
+          </li>
+          <li class="slide">
+            <div class="container slide__content">
+              <p class="slide__eyebrow">Palestras</p>
+              <h2 class="slide__title">6 palestras com quem faz tecnologia</h2>
+              <p class="slide__text">Inteligência artificial, DevOps, UX, segurança, dados e mobile, apresentados por profissionais do mercado e da academia.</p>
+              <a class="btn btn--cta btn--lg" href="#speakers">Conheça os palestrantes</a>
+            </div>
+          </li>
+          <li class="slide">
+            <div class="container slide__content">
+              <p class="slide__eyebrow">Oficinas e networking</p>
+              <h2 class="slide__title">Aprenda na prática e amplie sua rede</h2>
+              <p class="slide__text">Oficinas nos laboratórios da UCPel, feira de estágios e roda de conversa com egressos.</p>
+              <a class="btn btn--cta btn--lg" href="#schedule">Ver programação</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="slideshow__controls">
+          <button class="slideshow__button" type="button" data-slide-prev>
+            <span aria-hidden="true">&#8249;</span>
+            <span class="visually-hidden">Slide anterior</span>
+          </button>
+          <div class="slideshow__dots"></div>
+          <button class="slideshow__button" type="button" data-slide-pause>
+            <span aria-hidden="true" data-pause-icon>&#10074;&#10074;</span>
+            <span class="visually-hidden" data-pause-label>Pausar apresentação</span>
+          </button>
+          <button class="slideshow__button" type="button" data-slide-next>
+            <span aria-hidden="true">&#8250;</span>
+            <span class="visually-hidden">Próximo slide</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container about__grid">
+        <div class="about__text">
+          <p class="section__eyebrow">Sobre o evento</p>
+          <h2 class="section__title" id="about-title">Tecnologia que aproxima universidade e mercado</h2>
+          <div class="about__summary" data-event-summary>
+            <p>A Semana Tecnológica UCPel reúne estudantes, egressos, docentes e profissionais do mercado de tecnologia em três dias de palestras, oficinas práticas e atividades de networking.</p>
+          </div>
+          <a class="btn btn--primary" href="#schedule">Ver programação completa</a>
+        </div>
+        <ul class="stats" data-event-stats aria-label="O evento em números">
+          <li class="stats__item"><strong class="stats__value">3</strong><span class="stats__label">dias de evento</span></li>
+          <li class="stats__item"><strong class="stats__value">6</strong><span class="stats__label">palestras</span></li>
+          <li class="stats__item"><strong class="stats__value">4</strong><span class="stats__label">oficinas práticas</span></li>
+          <li class="stats__item"><strong class="stats__value">6</strong><span class="stats__label">palestrantes convidados</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="section section--alt schedule" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+        <p class="section__eyebrow">Programação</p>
+        <h2 class="section__title" id="schedule-title">Confira a agenda de cada dia</h2>
+        <p class="section__lead">Escolha o dia para ver as palestras, oficinas e atividades de networking.</p>
+
+        <div class="tabs" data-schedule>
+          <div class="tabs__list" data-schedule-tabs></div>
+          <div class="tabs__panels" data-schedule-panels></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speakers -->
+    <section class="section speakers" id="speakers" aria-labelledby="speakers-title">
+      <div class="container">
+        <p class="section__eyebrow">Palestrantes</p>
+        <h2 class="section__title" id="speakers-title">Quem vai compartilhar experiências</h2>
+        <p class="section__lead">Profissionais do mercado e pesquisadores que vão trazer o que há de mais atual em suas áreas.</p>
+        <div class="speakers__grid" data-speakers></div>
+      </div>
+    </section>
+
+    <!-- Registration -->
+    <section class="section section--highlight registration" id="registration" aria-labelledby="registration-title">
+      <div class="container registration__grid">
+        <div class="registration__intro">
+          <p class="section__eyebrow">Inscrições</p>
+          <h2 class="section__title" id="registration-title">Garanta sua vaga</h2>
+          <p class="section__lead">A participação é gratuita e aberta a estudantes, egressos, docentes e ao público externo. As vagas das oficinas são limitadas.</p>
+          <ul class="registration__benefits">
+            <li>Certificado de participação com horas complementares</li>
+            <li>Acesso a todas as palestras e à feira de estágios</li>
+            <li>Prioridade nas vagas das oficinas escolhidas</li>
+          </ul>
+        </div>
+
+        <form class="form" id="registration-form" novalidate>
+          <div class="form-field">
+            <label class="form-field__label" for="name">Nome completo</label>
+            <input class="form-field__input" type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="email">E-mail</label>
+            <input class="form-field__input" type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="profile">Perfil</label>
+            <select class="form-field__input" id="profile" name="profile" required>
+              <option value="">Selecione</option>
+              <option value="student">Estudante da UCPel</option>
+              <option value="alumni">Egresso da UCPel</option>
+              <option value="faculty">Docente</option>
+              <option value="external">Público externo</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="institution">Curso ou instituição</label>
+            <input class="form-field__input" type="text" id="institution" name="institution" autocomplete="organization" required>
+          </div>
+
+          <fieldset class="form-field form-field--group">
+            <legend class="form-field__label">Oficinas de interesse <span class="form-field__hint">(opcional)</span></legend>
+            <div class="form-field__options" data-workshop-options>
+              <label class="checkbox"><input type="checkbox" name="workshops" value="docker"> Primeiros passos com Docker</label>
+              <label class="checkbox"><input type="checkbox" name="workshops" value="figma"> Prototipação rápida no Figma</label>
+              <label class="checkbox"><input type="checkbox" name="workshops" value="python"> Análise de dados com Python</label>
+              <label class="checkbox"><input type="checkbox" name="workshops" value="flutter"> Seu primeiro app com Flutter</label>
+            </div>
+          </fieldset>
+
+          <div class="form-field">
+            <label class="checkbox">
+              <input type="checkbox" id="consent" name="consent" required>
+              Autorizo o uso dos meus dados para a organização do evento e emissão do certificado.
+            </label>
+          </div>
+
+          <button class="btn btn--cta btn--lg btn--block" type="submit">Confirmar inscrição</button>
+          <div class="form__status" data-form-status></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section location" id="location" aria-labelledby="location-title">
+      <div class="container location__grid">
+        <div class="location__info">
+          <p class="section__eyebrow">Localização</p>
+          <h2 class="section__title" id="location-title">Como chegar</h2>
+          <address class="location__address">
+            <strong>Campus I da UCPel</strong><br>
+            Rua Gonçalves Chaves, 373 — Centro<br>
+            Pelotas, RS — CEP 96015-560
+          </address>
+          <p>As palestras acontecem no Auditório Dom Antônio Zattera e as oficinas nos laboratórios de informática do Campus I.</p>
+          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Universidade+Cat%C3%B3lica+de+Pelotas+Rua+Gon%C3%A7alves+Chaves+373" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        </div>
+        <div class="location__map" data-map></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact / footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container site-footer__grid">
+      <div class="site-footer__col">
+        <p class="brand brand--light">
+          <span class="brand__title">Semana Tecnológica</span>
+          <span class="brand__subtitle">UCPel 2026</span>
+        </p>
+        <p>Curso de Análise e Desenvolvimento de Sistemas da Universidade Católica de Pelotas.</p>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__title">Contato</h2>
+        <ul class="site-footer__list">
+          <li><a href="mailto:semanatecnologica@ucpel.edu.br">semanatecnologica@ucpel.edu.br</a></li>
+          <li><a href="tel:+555321288000">(53) 2128-8000</a></li>
+          <li>Rua Gonçalves Chaves, 373 — Centro, Pelotas/RS</li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__title">Redes sociais</h2>
+        <ul class="site-footer__list">
+          <li><a href="https://www.instagram.com/ucpel/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/ucpel/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.linkedin.com/school/ucpel/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container site-footer__bottom">
+      <p>&copy; 2026 Semana Tecnológica UCPel. Todos os direitos reservados.</p>
+      <p>Desenvolvido por Ana Beatriz Moura, Gabriel Siqueira e Laura Pacheco.</p>
+    </div>
+  </footer>
+</body>
+</html>

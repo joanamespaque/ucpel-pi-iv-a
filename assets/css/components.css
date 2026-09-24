@@ -722,3 +722,15 @@
   height: 22px;
   fill: currentColor;
 }
+
+/* Notice (illustrative data warning) --------------------------------------- */
+.notice {
+  max-width: 62ch;
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--color-workshop);
+  border-radius: var(--radius-sm);
+  background-color: #fdf3d6;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}

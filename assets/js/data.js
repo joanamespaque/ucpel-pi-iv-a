@@ -10,6 +10,9 @@
  * An Event "has" many Speakers and "is composed of" many Activities.
  * A Workshop "is an" Activity with limited seats.
  * Identifiers are in English; user-facing values are in Portuguese.
+ *
+ * NOTE: speakers, companies, dates and rooms are illustrative data for the
+ * academic prototype; the official 2026 program had not been released.
  */
 
 export const escapeHtml = (value) =>

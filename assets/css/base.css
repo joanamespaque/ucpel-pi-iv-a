@@ -62,17 +62,17 @@ strong {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--color-primary);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-.section--alt :focus-visible,
-.section--highlight :focus-visible,
-.stats :focus-visible,
-.tabs__panel:focus-visible,
-.form :focus-visible {
-  outline-color: var(--color-primary);
+/* Blue does not show on dark backgrounds: switch to yellow there.
+   Both reach at least 3:1 against their background (WCAG 1.4.11). */
+.site-header :focus-visible,
+.hero :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--color-accent);
 }
 
 main:focus {

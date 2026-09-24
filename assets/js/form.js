@@ -1,6 +1,7 @@
 /**
  * Registration form — client-side validation and feedback.
- * There is no backend: a valid submission shows a confirmation message.
+ * There is no backend (GitHub Pages only serves static files): a valid
+ * submission shows a registration code, but nothing is sent or e-mailed.
  */
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -42,6 +43,8 @@ export function initForm(form = document.getElementById('registration-form')) {
     });
   });
 
+  preselectWorkshop(form);
+
   form.addEventListener('submit', (submitEvent) => {
     submitEvent.preventDefault();
 
@@ -55,13 +58,32 @@ export function initForm(form = document.getElementById('registration-form')) {
     }
 
     const firstName = form.elements.name.value.trim().split(/\s+/)[0];
-    const email = form.elements.email.value.trim();
     showStatus(
       status,
       'success',
-      `Inscrição confirmada, ${firstName}! Enviamos os detalhes do evento para ${email}.`,
+      `Inscrição registrada, ${firstName}! Seu código é ${generateCode()}. Apresente-o no credenciamento.`,
     );
     form.reset();
+  });
+}
+
+/** Registration code shown to the participant, e.g. ST26-4821. */
+function generateCode() {
+  const number = Math.floor(1000 + Math.random() * 9000);
+  return `ST26-${number}`;
+}
+
+/**
+ * "Quero participar" links in the workshop cards carry data-workshop="<id>":
+ * following one ticks that workshop in the form (the link itself scrolls to it).
+ */
+function preselectWorkshop(form) {
+  document.addEventListener('click', (clickEvent) => {
+    const link = clickEvent.target.closest('[data-workshop]');
+    if (!link) return;
+
+    const option = form.querySelector(`input[name="workshops"][value="${link.dataset.workshop}"]`);
+    if (option && !option.disabled) option.checked = true;
   });
 }
 

@@ -4,12 +4,18 @@
  *   Evento      -> Event    (getResumo()      -> getSummary())
  *   Palestrante -> Speaker  (exibirCard()     -> renderCard())
  *   Atividade   -> Activity (exibirNaAgenda() -> renderScheduleItem())
+ *   Oficina     -> Workshop (temVagas()       -> hasSeats(),
+ *                            exibirCard()     -> renderCard())
  *
  * An Event "has" many Speakers and "is composed of" many Activities.
+ * A Workshop "is an" Activity with limited seats.
  * Identifiers are in English; user-facing values are in Portuguese.
+ *
+ * NOTE: speakers, companies, dates and rooms are illustrative data for the
+ * academic prototype; the official 2026 program had not been released.
  */
 
-const escapeHtml = (value) =>
+export const escapeHtml = (value) =>
   String(value)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -95,6 +101,68 @@ export class Activity {
   }
 }
 
+/** Below this number of free seats the card warns about the last seats. */
+const LOW_SEATS_THRESHOLD = 5;
+
+export class Workshop extends Activity {
+  constructor({ id, seats, seatsTaken = 0, duration, prerequisites, bring, description, ...activity }) {
+    super({ ...activity, type: 'workshop' });
+    this.id = id;
+    this.seats = seats;
+    this.seatsTaken = seatsTaken;
+    this.duration = duration;
+    this.prerequisites = prerequisites;
+    this.bring = bring;
+    this.description = description;
+  }
+
+  get seatsLeft() {
+    return Math.max(this.seats - this.seatsTaken, 0);
+  }
+
+  hasSeats() {
+    return this.seatsLeft > 0;
+  }
+
+  /** Seat status as text (never color only), plus a modifier for styling. */
+  get seatsStatus() {
+    if (!this.hasSeats()) return { modifier: 'soldout', text: 'Esgotada' };
+    if (this.seatsLeft < LOW_SEATS_THRESHOLD) {
+      return { modifier: 'low', text: `Últimas vagas: ${this.seatsLeft} restantes` };
+    }
+    return { modifier: 'open', text: `${this.seatsLeft} vagas disponíveis` };
+  }
+
+  renderCard() {
+    const { modifier, text } = this.seatsStatus;
+    const icon = this.hasSeats() ? '&#10003;' : '&#10005;';
+    const action = this.hasSeats()
+      ? `<a class="btn btn--primary btn--block" href="#registration" data-workshop="${escapeHtml(this.id)}">Quero participar</a>`
+      : '<span class="btn btn--block btn--disabled" aria-disabled="true">Vagas esgotadas</span>';
+    const speaker = this.speaker ? ` · com ${escapeHtml(this.speaker.name)}` : '';
+
+    return `
+      <article class="workshop-card">
+        <p class="workshop-card__seats workshop-card__seats--${modifier}">
+          <span aria-hidden="true">${icon}</span> ${escapeHtml(text)}
+        </p>
+        <h3 class="workshop-card__title">${escapeHtml(this.title)}</h3>
+        <p class="workshop-card__when">
+          <time datetime="${this.date}T${this.time}">${formatWeekday(this.date)}, ${formatShortDate(this.date)} às ${this.time}</time>${speaker}
+        </p>
+        <p class="workshop-card__description">${escapeHtml(this.description)}</p>
+        <dl class="workshop-card__details">
+          <div><dt>Carga horária</dt><dd>${escapeHtml(this.duration)}</dd></div>
+          <div><dt>Vagas</dt><dd>${this.seats}</dd></div>
+          <div><dt>Local</dt><dd>${escapeHtml(this.room)}</dd></div>
+          <div><dt>Pré-requisitos</dt><dd>${escapeHtml(this.prerequisites)}</dd></div>
+          <div><dt>O que levar</dt><dd>${escapeHtml(this.bring)}</dd></div>
+        </dl>
+        ${action}
+      </article>`;
+  }
+}
+
 export class Event {
   constructor({ name, edition, startDate, endDate, description, location, speakers = [], activities = [] }) {
     this.name = name;
@@ -105,6 +173,10 @@ export class Event {
     this.location = location;
     this.speakers = speakers;
     this.activities = activities;
+  }
+
+  get workshops() {
+    return this.activities.filter((activity) => activity instanceof Workshop);
   }
 
   get days() {
@@ -216,18 +288,38 @@ const activities = [
   // Day 1
   new Activity({ date: '2026-10-20', time: '08:30', type: 'networking', room: HALL, title: 'Credenciamento e café de boas-vindas' }),
   new Activity({ date: '2026-10-20', time: '09:30', type: 'talk', room: AUDITORIUM, speaker: speakers.helena, title: 'Palestra de abertura: IA aplicada ao dia a dia das empresas' }),
-  new Activity({ date: '2026-10-20', time: '14:00', type: 'workshop', room: LAB_3, speaker: speakers.rafael, title: 'Oficina: primeiros passos com Docker' }),
+  new Workshop({
+    id: 'docker', date: '2026-10-20', time: '14:00', room: LAB_3, speaker: speakers.rafael,
+    title: 'Oficina: primeiros passos com Docker', duration: '2 horas', seats: 25, seatsTaken: 11,
+    prerequisites: 'Noções básicas de terminal', bring: 'Nada: os laboratórios têm computadores',
+    description: 'Crie sua primeira imagem, rode containers e suba uma aplicação web com banco de dados usando Docker Compose.',
+  }),
   new Activity({ date: '2026-10-20', time: '16:30', type: 'talk', room: AUDITORIUM, speaker: speakers.rafael, title: 'Da ideia ao deploy: cultura DevOps na prática' }),
   new Activity({ date: '2026-10-20', time: '19:00', type: 'talk', room: AUDITORIUM, speaker: speakers.marina, title: 'Design centrado nas pessoas: como a pesquisa muda produtos' }),
   // Day 2
   new Activity({ date: '2026-10-21', time: '09:00', type: 'talk', room: AUDITORIUM, speaker: speakers.lucas, title: 'Segurança da informação: o que todo desenvolvedor precisa saber' }),
-  new Activity({ date: '2026-10-21', time: '10:30', type: 'workshop', room: LAB_5, speaker: speakers.marina, title: 'Oficina: prototipação rápida no Figma' }),
-  new Activity({ date: '2026-10-21', time: '14:00', type: 'workshop', room: LAB_3, speaker: speakers.camila, title: 'Oficina: análise de dados com Python' }),
+  new Workshop({
+    id: 'figma', date: '2026-10-21', time: '10:30', room: LAB_5, speaker: speakers.marina,
+    title: 'Oficina: prototipação rápida no Figma', duration: '2 horas', seats: 25, seatsTaken: 22,
+    prerequisites: 'Nenhum', bring: 'Conta gratuita no Figma já criada',
+    description: 'Do rascunho ao protótipo navegável: componentes, layouts responsivos e testes rápidos com usuários.',
+  }),
+  new Workshop({
+    id: 'python', date: '2026-10-21', time: '14:00', room: LAB_3, speaker: speakers.camila,
+    title: 'Oficina: análise de dados com Python', duration: '3 horas', seats: 25, seatsTaken: 9,
+    prerequisites: 'Lógica de programação básica', bring: 'Notebook opcional: os laboratórios têm computadores',
+    description: 'Carregue uma planilha real com pandas, limpe os dados, responda perguntas com poucas linhas de código e gere seus primeiros gráficos.',
+  }),
   new Activity({ date: '2026-10-21', time: '16:30', type: 'talk', room: AUDITORIUM, speaker: speakers.camila, title: 'Dados como ativo estratégico no agronegócio' }),
   new Activity({ date: '2026-10-21', time: '18:30', type: 'networking', room: AUDITORIUM, title: 'Roda de conversa com egressos da UCPel' }),
   // Day 3
   new Activity({ date: '2026-10-22', time: '09:00', type: 'talk', room: AUDITORIUM, speaker: speakers.thiago, title: 'Aplicativos multiplataforma: escolhas que fazem diferença' }),
-  new Activity({ date: '2026-10-22', time: '10:30', type: 'workshop', room: LAB_5, speaker: speakers.thiago, title: 'Oficina: seu primeiro app com Flutter' }),
+  new Workshop({
+    id: 'flutter', date: '2026-10-22', time: '10:30', room: LAB_5, speaker: speakers.thiago,
+    title: 'Oficina: seu primeiro app com Flutter', duration: '3 horas', seats: 20, seatsTaken: 20,
+    prerequisites: 'Lógica de programação básica', bring: 'Nada: o ambiente já está instalado nos laboratórios',
+    description: 'Monte a interface de um app de lista de tarefas, trate o estado da tela e rode o resultado no emulador.',
+  }),
   new Activity({ date: '2026-10-22', time: '14:00', type: 'networking', room: HALL, title: 'Feira de estágios e carreiras em tecnologia' }),
   new Activity({ date: '2026-10-22', time: '17:00', type: 'networking', room: AUDITORIUM, title: 'Painel de encerramento e entrega de certificados' }),
 ];

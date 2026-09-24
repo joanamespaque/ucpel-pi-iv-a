@@ -13,7 +13,8 @@
   --color-surface: #ffffff;
   --color-text: #1b2433;
   --color-muted: #55627a;
-  --color-border: #d5deea;
+  --color-border: #d5deea;       /* decorative dividers only */
+  --color-border-input: #7c8aa0; /* form fields: 3.5:1 on white (WCAG 1.4.11) */
   --color-on-primary: #ffffff;
   --color-on-accent: #072849;
   --color-success: #146c43;

@@ -3,8 +3,9 @@
    Base styles target mobile; wider screens are enhanced below.
    ========================================================================== */
 
-/* Mobile and tablet navigation (< 1024px) ----------------------------------- */
-@media (max-width: 1023.98px) {
+/* Mobile, tablet and small desktop navigation (< 1280px) --------------------- */
+/* Eight menu items plus the CTA only fit on one line from 1280px up. */
+@media (max-width: 1279.98px) {
   .nav-toggle {
     display: flex;
   }
@@ -112,12 +113,16 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .workshops__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .location__map {
     min-height: 400px;
   }
 
   .site-footer__grid {
-    grid-template-columns: 2fr 1.5fr 1fr;
+    grid-template-columns: 2fr 1.5fr 1.5fr;
   }
 }
 
@@ -135,8 +140,19 @@
     grid-template-columns: 1fr 1.2fr;
   }
 
+  .contact__grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
   .registration__intro {
     position: sticky;
     top: calc(var(--header-height) + var(--space-6));
+  }
+}
+
+/* Wide desktop (>= 1200px) -------------------------------------------------------- */
+@media (min-width: 1200px) {
+  .workshops__grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

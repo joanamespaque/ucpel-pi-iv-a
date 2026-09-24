@@ -2,6 +2,7 @@
  * Hero slideshow — autoplay, previous/next, dots and pause control.
  */
 const AUTOPLAY_DELAY = 6000;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 export function initSlideshow(root = document.querySelector('.slideshow')) {
   if (!root) return;
@@ -13,6 +14,7 @@ export function initSlideshow(root = document.querySelector('.slideshow')) {
   const pauseButton = root.querySelector('[data-slide-pause]');
   const pauseIcon = root.querySelector('[data-pause-icon]');
   const pauseLabel = root.querySelector('[data-pause-label]');
+  const track = root.querySelector('.slideshow__track');
 
   let current = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
   let timer = null;
@@ -37,6 +39,7 @@ export function initSlideshow(root = document.querySelector('.slideshow')) {
       const isActive = slideIndex === current;
       slide.classList.toggle('is-active', isActive);
       slide.setAttribute('aria-hidden', String(!isActive));
+      slide.inert = !isActive;
     });
     dots.forEach((dot, dotIndex) => {
       dot.setAttribute('aria-current', String(dotIndex === current));
@@ -62,6 +65,8 @@ export function initSlideshow(root = document.querySelector('.slideshow')) {
     isPaused = paused;
     pauseIcon.innerHTML = paused ? '&#9654;' : '&#10074;&#10074;';
     pauseLabel.textContent = paused ? 'Retomar apresentação' : 'Pausar apresentação';
+    // Announce slide changes only when they are triggered by the visitor
+    track.setAttribute('aria-live', paused ? 'polite' : 'off');
     if (paused) {
       stop();
     } else {
@@ -90,5 +95,11 @@ export function initSlideshow(root = document.querySelector('.slideshow')) {
   });
 
   goTo(current);
-  start();
+
+  // Respect the visitor's reduced motion preference: no autoplay
+  if (prefersReducedMotion.matches) {
+    setPaused(true);
+  } else {
+    start();
+  }
 }

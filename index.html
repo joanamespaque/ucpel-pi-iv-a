@@ -32,9 +32,11 @@
   <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="#home">
+      <a class="brand" href="#home" aria-label="Semana Tecnológica UCPel 2026, voltar ao início">
         <span class="brand__title">Semana Tecnológica</span>
         <span class="brand__subtitle">UCPel 2026</span>
       </a>
@@ -60,12 +62,12 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <!-- Hero / slideshow -->
     <section class="hero" id="home" aria-label="Destaques do evento">
-      <div class="slideshow">
-        <ul class="slideshow__track">
-          <li class="slide is-active">
+      <div class="slideshow" role="region" aria-roledescription="carrossel" aria-label="Destaques da Semana Tecnológica">
+        <div class="slideshow__track" aria-live="off">
+          <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 de 3">
             <img class="slide__image" src="assets/img/slides/slide-1.svg" alt="Ilustração de um chip com o número 26 cercado por circuitos, representando a edição 2026 do evento" width="1600" height="900" loading="eager">
             <div class="container slide__content">
               <p class="slide__eyebrow">20 a 22 de outubro de 2026 · Campus I · Pelotas</p>
@@ -73,8 +75,8 @@
               <p class="slide__text">Três dias de palestras, oficinas práticas e networking com quem constrói a tecnologia no Brasil.</p>
               <a class="btn btn--cta btn--lg" href="#registration">Inscreva-se gratuitamente</a>
             </div>
-          </li>
-          <li class="slide">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
             <img class="slide__image" src="assets/img/slides/slide-2.svg" alt="Ilustração de um monitor exibindo código diante de uma plateia" width="1600" height="900" loading="lazy">
             <div class="container slide__content">
               <p class="slide__eyebrow">Palestras</p>
@@ -82,8 +84,8 @@
               <p class="slide__text">Inteligência artificial, DevOps, UX, segurança, dados e mobile, apresentados por profissionais do mercado e da academia.</p>
               <a class="btn btn--cta btn--lg" href="#speakers">Conheça os palestrantes</a>
             </div>
-          </li>
-          <li class="slide">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
             <img class="slide__image" src="assets/img/slides/slide-3.svg" alt="Ilustração de uma rede de pessoas conectadas, representando o networking" width="1600" height="900" loading="lazy">
             <div class="container slide__content">
               <p class="slide__eyebrow">Oficinas e networking</p>
@@ -91,15 +93,15 @@
               <p class="slide__text">Oficinas nos laboratórios da UCPel, feira de estágios e roda de conversa com egressos.</p>
               <a class="btn btn--cta btn--lg" href="#schedule">Ver programação</a>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
 
         <div class="slideshow__controls">
           <button class="slideshow__button" type="button" data-slide-prev>
             <span aria-hidden="true">&#8249;</span>
             <span class="visually-hidden">Slide anterior</span>
           </button>
-          <div class="slideshow__dots"></div>
+          <div class="slideshow__dots" role="group" aria-label="Escolher slide"></div>
           <button class="slideshow__button" type="button" data-slide-pause>
             <span aria-hidden="true" data-pause-icon>&#10074;&#10074;</span>
             <span class="visually-hidden" data-pause-label>Pausar apresentação</span>
@@ -170,7 +172,8 @@
           </ul>
         </div>
 
-        <form class="form" id="registration-form" novalidate>
+        <form class="form" id="registration-form" novalidate aria-describedby="form-required-note">
+          <p class="form__note" id="form-required-note">Todos os campos são obrigatórios, exceto quando indicado.</p>
           <div class="form-field">
             <label class="form-field__label" for="name">Nome completo</label>
             <input class="form-field__input" type="text" id="name" name="name" autocomplete="name" required>
@@ -215,7 +218,7 @@
           </div>
 
           <button class="btn btn--cta btn--lg btn--block" type="submit">Confirmar inscrição</button>
-          <div class="form__status" data-form-status></div>
+          <div class="form__status" role="status" aria-live="polite" data-form-status></div>
         </form>
       </div>
     </section>

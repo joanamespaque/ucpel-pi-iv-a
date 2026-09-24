@@ -19,8 +19,26 @@ export function initSchedule(root = document.querySelector('[data-schedule]')) {
     });
   }
 
-  tabs.forEach((tab) => {
+  tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => selectTab(tab));
+
+    // Keyboard support as recommended by the WAI-ARIA tabs pattern
+    tab.addEventListener('keydown', (keyEvent) => {
+      const keyMap = {
+        ArrowRight: index + 1,
+        ArrowDown: index + 1,
+        ArrowLeft: index - 1,
+        ArrowUp: index - 1,
+        Home: 0,
+        End: tabs.length - 1,
+      };
+      if (!(keyEvent.key in keyMap)) return;
+
+      keyEvent.preventDefault();
+      const nextTab = tabs[(keyMap[keyEvent.key] + tabs.length) % tabs.length];
+      selectTab(nextTab);
+      nextTab.focus();
+    });
   });
 
   return { tabs, selectTab };

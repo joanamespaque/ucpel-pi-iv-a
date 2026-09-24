@@ -481,7 +481,7 @@
   width: 100%;
   min-height: 48px;
   padding: var(--space-2) var(--space-4);
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-border-input);
   border-radius: var(--radius-sm);
   background-color: var(--color-surface);
   transition: border-color var(--transition);

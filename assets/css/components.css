@@ -414,6 +414,15 @@
   background-color: var(--color-primary-light);
 }
 
+.speaker-card__photo--initials {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
 .speaker-card__body {
   display: flex;
   flex-direction: column;

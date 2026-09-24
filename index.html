@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -123,7 +125,7 @@
         <p class="section__lead">Escolha o dia para ver as palestras, oficinas e atividades de networking.</p>
 
         <div class="tabs" data-schedule>
-          <div class="tabs__list" data-schedule-tabs></div>
+          <div class="tabs__list" role="tablist" aria-label="Dias do evento" data-schedule-tabs></div>
           <div class="tabs__panels" data-schedule-panels></div>
         </div>
       </div>

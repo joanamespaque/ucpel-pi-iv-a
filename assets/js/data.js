@@ -153,6 +153,7 @@ export const formatWeekday = (isoDate) => {
 const speakers = {
   helena: new Speaker({
     id: 'helena',
+    photo: 'assets/img/speakers/helena.svg',
     name: 'Dra. Helena Duarte',
     role: 'Pesquisadora em Inteligência Artificial',
     organization: 'Lumen Labs',
@@ -161,6 +162,7 @@ const speakers = {
   }),
   rafael: new Speaker({
     id: 'rafael',
+    photo: 'assets/img/speakers/rafael.svg',
     name: 'Rafael Tavares',
     role: 'Engenheiro de Plataforma',
     organization: 'Nuvra Cloud',
@@ -169,6 +171,7 @@ const speakers = {
   }),
   marina: new Speaker({
     id: 'marina',
+    photo: 'assets/img/speakers/marina.svg',
     name: 'Marina Kowalski',
     role: 'Head de UX',
     organization: 'Bússola Digital',
@@ -177,6 +180,7 @@ const speakers = {
   }),
   lucas: new Speaker({
     id: 'lucas',
+    photo: 'assets/img/speakers/lucas.svg',
     name: 'Prof. Dr. Lucas Brandão',
     role: 'Professor e pesquisador',
     organization: 'Instituto Sul de Tecnologia',
@@ -185,6 +189,7 @@ const speakers = {
   }),
   camila: new Speaker({
     id: 'camila',
+    photo: 'assets/img/speakers/camila.svg',
     name: 'Camila Nogueira',
     role: 'Cientista de Dados',
     organization: 'Pampa Analytics',
@@ -193,6 +198,7 @@ const speakers = {
   }),
   thiago: new Speaker({
     id: 'thiago',
+    photo: 'assets/img/speakers/thiago.svg',
     name: 'Thiago Ferraz',
     role: 'Desenvolvedor Mobile Sênior',
     organization: 'Farol Apps',

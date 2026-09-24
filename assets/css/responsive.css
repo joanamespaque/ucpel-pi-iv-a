@@ -3,8 +3,9 @@
    Base styles target mobile; wider screens are enhanced below.
    ========================================================================== */
 
-/* Mobile and tablet navigation (< 1024px) ----------------------------------- */
-@media (max-width: 1023.98px) {
+/* Mobile, tablet and small desktop navigation (< 1200px) --------------------- */
+/* Eight menu items plus the CTA only fit on one line from 1200px up. */
+@media (max-width: 1199.98px) {
   .nav-toggle {
     display: flex;
   }

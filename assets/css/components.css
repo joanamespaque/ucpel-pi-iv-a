@@ -545,3 +545,88 @@
   color: var(--color-error);
   background-color: var(--color-error-bg);
 }
+
+/* Workshop card ------------------------------------------------------------ */
+.workshop-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.workshop-card__seats {
+  align-self: flex-start;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.workshop-card__seats--open {
+  color: var(--color-success);
+  background-color: var(--color-success-bg);
+}
+
+.workshop-card__seats--low {
+  color: var(--color-workshop);
+  background-color: #fdf3d6;
+}
+
+.workshop-card__seats--soldout {
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+}
+
+.workshop-card__title {
+  font-size: var(--text-lg);
+}
+
+.workshop-card__when {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.workshop-card__details {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.workshop-card__details dt {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.workshop-card__details dd {
+  color: var(--color-muted);
+}
+
+/* Keeps the button at the bottom so cards in the same row line up */
+.workshop-card .btn {
+  margin-top: auto;
+}
+
+.btn--disabled {
+  background-color: var(--color-bg);
+  color: var(--color-muted);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.btn--disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.checkbox__note {
+  color: var(--color-muted);
+}
+
+.checkbox:has(input:disabled) {
+  cursor: not-allowed;
+}

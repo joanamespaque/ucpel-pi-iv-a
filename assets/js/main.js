@@ -2,7 +2,14 @@
  * Entry point — renders the dynamic content and starts the UI modules.
  */
 import { event } from './data.js';
-import { renderSchedule, renderSpeakers, renderStats, renderSummary } from './render.js';
+import {
+  renderSchedule,
+  renderSpeakers,
+  renderStats,
+  renderSummary,
+  renderWorkshopOptions,
+  renderWorkshops,
+} from './render.js';
 import { initNav } from './nav.js';
 import { initSlideshow } from './slideshow.js';
 import { initSchedule } from './schedule.js';
@@ -16,6 +23,8 @@ renderSchedule(
   document.querySelector('[data-schedule-panels]'),
 );
 renderSpeakers(event, document.querySelector('[data-speakers]'));
+renderWorkshops(event, document.querySelector('[data-workshops]'));
+renderWorkshopOptions(event, document.querySelector('[data-workshop-options]'));
 
 initNav();
 initSlideshow();

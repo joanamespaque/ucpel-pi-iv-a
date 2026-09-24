@@ -21,6 +21,7 @@
 }
 
 .brand {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   line-height: 1.1;
@@ -33,6 +34,7 @@
 }
 
 .brand__title {
+  white-space: nowrap;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: var(--text-lg);
@@ -50,6 +52,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
+}
+
+.main-nav__cta {
+  white-space: nowrap;
 }
 
 .main-nav__list {
@@ -110,6 +116,12 @@
 
 /* Speakers ---------------------------------------------------------------- */
 .speakers__grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* Workshops --------------------------------------------------------------- */
+.workshops__grid {
   display: grid;
   gap: var(--space-5);
 }

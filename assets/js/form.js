@@ -42,6 +42,8 @@ export function initForm(form = document.getElementById('registration-form')) {
     });
   });
 
+  preselectWorkshop(form);
+
   form.addEventListener('submit', (submitEvent) => {
     submitEvent.preventDefault();
 
@@ -62,6 +64,20 @@ export function initForm(form = document.getElementById('registration-form')) {
       `Inscrição confirmada, ${firstName}! Enviamos os detalhes do evento para ${email}.`,
     );
     form.reset();
+  });
+}
+
+/**
+ * "Quero participar" links in the workshop cards carry data-workshop="<id>":
+ * following one ticks that workshop in the form (the link itself scrolls to it).
+ */
+function preselectWorkshop(form) {
+  document.addEventListener('click', (clickEvent) => {
+    const link = clickEvent.target.closest('[data-workshop]');
+    if (!link) return;
+
+    const option = form.querySelector(`input[name="workshops"][value="${link.dataset.workshop}"]`);
+    if (option && !option.disabled) option.checked = true;
   });
 }
 

@@ -12,7 +12,7 @@
  * Identifiers are in English; user-facing values are in Portuguese.
  */
 
-const escapeHtml = (value) =>
+export const escapeHtml = (value) =>
   String(value)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')

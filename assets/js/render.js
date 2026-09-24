@@ -1,8 +1,8 @@
 /**
- * Renders the dynamic sections (About, Schedule and Speakers)
+ * Renders the dynamic sections (About, Schedule, Speakers and Workshops)
  * from the domain model defined in data.js.
  */
-import { formatShortDate, formatWeekday } from './data.js';
+import { escapeHtml, formatShortDate, formatWeekday } from './data.js';
 
 export function renderSummary(event, container) {
   if (!container) return;
@@ -61,4 +61,25 @@ export function renderSchedule(event, tabsContainer, panelsContainer) {
 export function renderSpeakers(event, container) {
   if (!container) return;
   container.innerHTML = event.speakers.map((speaker) => speaker.renderCard()).join('');
+}
+
+export function renderWorkshops(event, container) {
+  if (!container) return;
+  container.innerHTML = event.workshops.map((workshop) => workshop.renderCard()).join('');
+}
+
+/** Builds the workshop checkboxes of the registration form; sold-out ones are disabled. */
+export function renderWorkshopOptions(event, container) {
+  if (!container) return;
+
+  container.innerHTML = event.workshops
+    .map((workshop) => {
+      const soldOut = workshop.hasSeats() ? '' : ' <span class="checkbox__note">(esgotada)</span>';
+      return `
+        <label class="checkbox">
+          <input type="checkbox" name="workshops" value="${escapeHtml(workshop.id)}"${workshop.hasSeats() ? '' : ' disabled'}>
+          ${escapeHtml(workshop.title.replace(/^Oficina:\s*/, ''))}${soldOut}
+        </label>`;
+    })
+    .join('');
 }

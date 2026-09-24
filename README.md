@@ -161,11 +161,44 @@ A página segue o checklist das **WCAG 2.2**:
 
 ## Testes realizados
 
-_Esta seção é preenchida ao fim do desenvolvimento._
+**Testes funcionais automatizados** (Playwright + Chromium, em 375 px e 1280 px)
+
+| Cenário | Resultado |
+|---|---|
+| Renderização dos 6 cards de palestrantes e das 3 abas da programação a partir do modelo | ✅ |
+| Troca de dia na programação por clique e pelo teclado (setas, Home e End) | ✅ |
+| Slideshow: avançar, voltar, indicadores e pausa | ✅ |
+| Slideshow sem troca automática quando o sistema pede movimento reduzido | ✅ |
+| Formulário: mensagens de erro nos campos obrigatórios e e-mail inválido | ✅ |
+| Formulário: mensagem de confirmação após envio válido | ✅ |
+| Menu mobile: abre, fecha ao escolher um link e fecha com Esc | ✅ |
+| Link "Pular para o conteúdo" é o primeiro item focado pelo Tab | ✅ |
+| Sem rolagem horizontal em 375 px | ✅ |
+| Console do navegador sem erros de JavaScript | ✅ |
+
+**Auditorias**
+
+| Ferramenta | Resultado |
+|---|---|
+| axe-core (WCAG 2.0, 2.1 e 2.2 A/AA + boas práticas) | 0 violações em desktop e mobile |
+| Lighthouse — Acessibilidade | 100 |
+| Lighthouse — Boas práticas | 100 |
+| Lighthouse — SEO | 100 |
+| Lighthouse — Desempenho (simulação mobile) | 86 |
+| html-validate | Sem erros de estrutura* |
+
+\* O validador aponta apenas as checkboxes de oficinas com o mesmo `name`, o que é o padrão HTML para grupos de opções.
 
 ## Capturas de tela
 
-_Esta seção é preenchida ao fim do desenvolvimento._
+| Desktop | Mobile |
+|---|---|
+| ![Hero com slideshow no desktop](docs/screenshots/desktop-hero.png) | ![Hero no mobile](docs/screenshots/mobile-hero.png) |
+| ![Programação por dia no desktop](docs/screenshots/desktop-schedule.png) | ![Programação no mobile](docs/screenshots/mobile-schedule.png) |
+| ![Formulário de inscrição no desktop](docs/screenshots/desktop-registration.png) | ![Formulário de inscrição no mobile](docs/screenshots/mobile-registration.png) |
+| ![Cards dos palestrantes](docs/screenshots/desktop-speakers.png) | ![Menu mobile aberto](docs/screenshots/mobile-menu.png) |
+
+Outras capturas: [sobre o evento](docs/screenshots/desktop-about.png) e [rodapé](docs/screenshots/desktop-contact.png).
 
 ## Equipe
 

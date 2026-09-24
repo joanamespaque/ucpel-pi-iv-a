@@ -3,6 +3,10 @@
  */
 import { event } from './data.js';
 import { renderSchedule, renderSpeakers, renderStats, renderSummary } from './render.js';
+import { initNav } from './nav.js';
+import { initSlideshow } from './slideshow.js';
+import { initSchedule } from './schedule.js';
+import { initForm } from './form.js';
 
 renderSummary(event, document.querySelector('[data-event-summary]'));
 renderStats(event, document.querySelector('[data-event-stats]'));
@@ -12,3 +16,8 @@ renderSchedule(
   document.querySelector('[data-schedule-panels]'),
 );
 renderSpeakers(event, document.querySelector('[data-speakers]'));
+
+initNav();
+initSlideshow();
+initSchedule();
+initForm();

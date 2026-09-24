@@ -202,9 +202,7 @@ Outras capturas: [sobre o evento](docs/screenshots/desktop-about.png) e [rodapé
 
 ## Equipe
 
-- Ana Beatriz Moura
-- Gabriel Siqueira
-- Laura Pacheco
+- Joana Mespaque Borges
 
 ## Referências
 

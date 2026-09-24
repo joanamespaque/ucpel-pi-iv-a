@@ -122,7 +122,7 @@
   }
 
   .site-footer__grid {
-    grid-template-columns: 2fr 1.5fr 1fr;
+    grid-template-columns: 2fr 1.5fr 1.5fr;
   }
 }
 
@@ -137,6 +137,10 @@
   }
 
   .registration__grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .contact__grid {
     grid-template-columns: 1fr 1.2fr;
   }
 

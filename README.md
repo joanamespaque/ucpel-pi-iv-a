@@ -47,7 +47,7 @@ A página usa como referência a página da edição anterior do evento e melhor
 - Cards com o perfil dos palestrantes
 - Cards das oficinas com vagas disponíveis, carga horária, pré-requisitos e o que levar; o botão "Quero participar" já marca a oficina no formulário
 - Formulário de inscrição com validação e código de inscrição (ST26-XXXX) na confirmação
-- Mapa do campus incorporado
+- Mapa do campus carregado sob demanda (sem cookies de terceiros até o visitante pedir)
 - Seção de contato com os canais oficiais da UCPel e perguntas frequentes
 - Rodapé com informações institucionais, links úteis e redes sociais oficiais da UCPel
 - Layout responsivo para mobile, tablet e desktop
@@ -62,7 +62,7 @@ A página usa como referência a página da edição anterior do evento e melhor
 | Git e GitHub | Versionamento do código |
 | GitHub Pages | Publicação da página |
 
-O projeto não tem etapa de build nem dependências: os arquivos são servidos exatamente como estão no repositório.
+O projeto não tem etapa de build nem dependências: os arquivos são servidos exatamente como estão no repositório. As fontes Inter e Poppins (licença SIL Open Font License) ficam no próprio repositório, em `assets/fonts/`.
 
 ## Estrutura de pastas
 
@@ -71,6 +71,7 @@ ucpel-pi-iv-a/
 ├── index.html              # Página principal
 ├── assets/
 │   ├── css/
+│   │   ├── fonts.css       # @font-face das fontes locais
 │   │   ├── reset.css       # Normalização entre navegadores
 │   │   ├── variables.css   # Design tokens (cores, tipografia, espaçamentos)
 │   │   ├── base.css        # Estilos globais e tipografia
@@ -84,9 +85,12 @@ ucpel-pi-iv-a/
 │   │   ├── slideshow.js    # Slideshow do hero
 │   │   ├── schedule.js     # Abas da programação
 │   │   ├── form.js         # Validação do formulário e pré-seleção de oficinas
+│   │   ├── map.js          # Carrega o mapa do Google só quando o visitante pede
 │   │   └── main.js         # Ponto de entrada
+│   ├── fonts/              # Inter e Poppins (woff2, subconjunto latino) + licenças
 │   └── img/                # Ilustrações, avatares e favicon (SVG)
 ├── docs/
+│   ├── lighthouse/         # Relatórios do Lighthouse (antes e depois)
 │   └── screenshots/        # Capturas de tela para o relatório
 ├── .editorconfig
 ├── .gitignore
@@ -169,6 +173,15 @@ Ao fim do desenvolvimento, a `develop` é integrada à `main` por pull request e
 | `docs: flag speakers and schedule as illustrative data` | Aviso de dados ilustrativos |
 | `chore: remove unused screenshots from repository root` | Organização do repositório |
 
+**Versão 1.2.0 (desempenho e segurança)** — correções a partir do relatório do Lighthouse da versão 1.1.0:
+
+| Commit | O que mudou |
+|---|---|
+| `perf(map): load Google Maps only on demand` | O mapa só é carregado quando o visitante clica: sem cookies de terceiros e sem ~100 KiB de JavaScript do Google no primeiro acesso |
+| `perf(fonts): self-host Inter and Poppins` | Fim da cadeia de requisições do Google Fonts, que bloqueava a renderização |
+| `perf(hero): fetch the first slide image with high priority` | Imagem principal (LCP) baixada primeiro |
+| `feat(security): add Content Security Policy and referrer policy` | CSP via `<meta>` e política de referrer |
+
 ## Acessibilidade
 
 A página segue o checklist das **WCAG 2.2**:
@@ -209,13 +222,28 @@ A página segue o checklist das **WCAG 2.2**:
 | Ferramenta | Resultado |
 |---|---|
 | axe-core (WCAG 2.0, 2.1 e 2.2 A/AA + boas práticas) | 0 violações em desktop e mobile |
-| Lighthouse — Acessibilidade | 100 |
-| Lighthouse — Boas práticas | 100 |
-| Lighthouse — SEO | 100 |
-| Lighthouse — Desempenho (simulação mobile) | 86 |
 | html-validate | Sem erros |
 
-Os testes da versão 1.1.0 foram refeitos com Playwright + axe-core (0 violações em 1280 px e 375 px) e html-validate. Os resultados do Lighthouse são da versão 1.0.0.
+Os testes funcionais e o axe-core foram refeitos na versão 1.2.0 (0 violações em 1280 px e 375 px).
+
+**Lighthouse — antes e depois** (relatórios em [`docs/lighthouse/`](docs/lighthouse/))
+
+| Categoria | v1.1.0 (GitHub Pages, mobile) | v1.2.0 (local, mobile) | v1.2.0 (local, desktop) |
+|---|---|---|---|
+| Desempenho | 89 | 99 | 100 |
+| Acessibilidade | 100 | 100 | 100 |
+| Boas práticas | 77 | 100 | 100 |
+| SEO | 100 | 100 | 100 |
+| First Contentful Paint | 3,0 s | 1,7 s | 0,4 s |
+| Largest Contentful Paint | 3,0 s | 1,8 s | 0,5 s |
+
+O que causava as perdas na v1.1.0 e como foi resolvido:
+
+- **Boas práticas 77:** 24 cookies de terceiros vindos do `<iframe>` do Google Maps. Agora o mapa só é carregado quando o visitante clica em "Carregar mapa interativo", o que também protege a privacidade de quem só visita a página (LGPD).
+- **Desempenho 89:** o Google Fonts bloqueava a renderização (~1,1 s em 4G lento) e o mapa trazia ~180 KiB de JavaScript não minificado ou não usado, além de tarefas longas na thread principal. As fontes passaram a ser servidas pelo próprio site, com pré-carregamento das duas usadas no topo.
+- **Segurança (itens informativos, sem nota):** foi adicionada uma Content Security Policy via `<meta>`. HSTS, COOP e proteção contra clickjacking (X-Frame-Options/`frame-ancestors`) exigem cabeçalhos HTTP, que o GitHub Pages não permite configurar. O aviso de *Trusted Types* continua: a renderização usa `innerHTML`, mas todos os dados passam por `escapeHtml()` antes.
+
+Limitações da medição: a v1.1.0 foi medida no GitHub Pages com extensões do Chrome ativas. A v1.2.0 foi medida em servidor local (`python3 -m http.server`), sem compressão nem cache, o que explica os avisos restantes de CSS/JS não minificados e de cache. O tempo de cache (10 min) é definido pelo GitHub Pages e não pode ser alterado. Para o relatório final, repetir a medição na página publicada, em janela anônima.
 
 ## Capturas de tela
 

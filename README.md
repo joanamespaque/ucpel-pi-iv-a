@@ -247,14 +247,59 @@ Limitações da medição: a v1.1.0 foi medida no GitHub Pages com extensões do
 
 ## Capturas de tela
 
-| Desktop | Mobile |
-|---|---|
-| ![Hero com slideshow no desktop](docs/screenshots/desktop-hero.png) | ![Hero no mobile](docs/screenshots/mobile-hero.png) |
-| ![Programação por dia no desktop](docs/screenshots/desktop-schedule.png) | ![Programação no mobile](docs/screenshots/mobile-schedule.png) |
-| ![Formulário de inscrição no desktop](docs/screenshots/desktop-registration.png) | ![Formulário de inscrição no mobile](docs/screenshots/mobile-registration.png) |
-| ![Cards dos palestrantes](docs/screenshots/desktop-speakers.png) | ![Menu mobile aberto](docs/screenshots/mobile-menu.png) |
+Capturas da versão v1.2.0, geradas com Playwright (Chromium) a partir do código publicado. As montagens usadas no relatório estão em [`figura9_desktop.png`](docs/screenshots/figura9_desktop.png) e [`figura10_mobile.png`](docs/screenshots/figura10_mobile.png).
 
-Outras capturas: [sobre o evento](docs/screenshots/desktop-about.png) e [rodapé](docs/screenshots/desktop-contact.png).
+### Desktop (1280 px)
+
+**Início (hero + slideshow)**
+
+![Início com menu de 8 itens e slideshow no desktop](docs/screenshots/desktop-home.png)
+
+**Sobre o evento**
+
+![Seção Sobre o evento no desktop](docs/screenshots/desktop-about.png)
+
+**Programação (abas por dia)**
+
+![Programação por dia no desktop](docs/screenshots/desktop-schedule.png)
+
+**Palestrantes**
+
+![Cards dos palestrantes no desktop](docs/screenshots/desktop-speakers.png)
+
+**Oficinas**
+
+![Cards das oficinas com vagas no desktop](docs/screenshots/desktop-workshops.png)
+
+**Inscrições**
+
+| Formulário | Erros de validação | Confirmação |
+|---|---|---|
+| ![Formulário de inscrição no desktop](docs/screenshots/desktop-registration.png) | ![Formulário com mensagens de erro](docs/screenshots/desktop-registration-errors.png) | ![Formulário com código de inscrição](docs/screenshots/desktop-registration-success.png) |
+
+**Localização**
+
+![Seção Localização no desktop](docs/screenshots/desktop-location.png)
+
+**Contato**
+
+![Seção Contato com perguntas frequentes no desktop](docs/screenshots/desktop-contact.png)
+
+**Rodapé**
+
+![Rodapé no desktop](docs/screenshots/desktop-footer.png)
+
+### Mobile (375 px)
+
+| Início | Menu aberto | Sobre o evento |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/mobile-home.png" alt="Início no mobile" width="240"> | <img src="docs/screenshots/mobile-menu.png" alt="Menu mobile aberto" width="240"> | <img src="docs/screenshots/mobile-about.png" alt="Sobre o evento no mobile" width="240"> |
+| **Programação** | **Palestrantes** | **Oficinas** |
+| <img src="docs/screenshots/mobile-schedule.png" alt="Programação no mobile" width="240"> | <img src="docs/screenshots/mobile-speakers.png" alt="Palestrantes no mobile" width="240"> | <img src="docs/screenshots/mobile-workshops.png" alt="Oficinas no mobile" width="240"> |
+| **Inscrições** | **Localização** | **Contato** |
+| <img src="docs/screenshots/mobile-registration.png" alt="Formulário de inscrição no mobile" width="240"> | <img src="docs/screenshots/mobile-location.png" alt="Localização no mobile" width="240"> | <img src="docs/screenshots/mobile-contact.png" alt="Contato no mobile" width="240"> |
+| **Rodapé** | | |
+| <img src="docs/screenshots/mobile-footer.png" alt="Rodapé no mobile" width="240"> | | |
 
 ## Equipe
 

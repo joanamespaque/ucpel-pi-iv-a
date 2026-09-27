@@ -247,13 +247,26 @@
           <p>As palestras acontecem no Auditório Dom Antônio Zattera e as oficinas nos laboratórios de informática do Campus I.</p>
           <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Universidade+Cat%C3%B3lica+de+Pelotas+Rua+Gon%C3%A7alves+Chaves+373" target="_blank" rel="noopener">Abrir no Google Maps</a>
         </div>
-        <div class="location__map">
-          <iframe
-            src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
-            title="Mapa com a localização do Campus I da UCPel"
-            width="600" height="400" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen></iframe>
+        <!-- The Google Maps iframe is only loaded on request: it brings third-party
+             cookies and ~100 KB of scripts that would slow down the first visit. -->
+        <div class="location__map" data-map
+          data-map-src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
+          data-map-title="Mapa com a localização do Campus I da UCPel">
+          <div class="map-placeholder">
+            <svg class="map-placeholder__pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            <p class="map-placeholder__title">Campus I da UCPel</p>
+            <p>Rua Gonçalves Chaves, 373 — Centro, Pelotas/RS</p>
+            <button class="btn btn--primary map-placeholder__button" type="button" data-map-load>Carregar mapa interativo</button>
+            <p class="map-placeholder__note">O mapa é fornecido pelo Google, que pode usar cookies.</p>
+          </div>
+          <noscript>
+            <iframe
+              src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
+              title="Mapa com a localização do Campus I da UCPel"
+              width="600" height="400" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </noscript>
         </div>
       </div>
     </section>

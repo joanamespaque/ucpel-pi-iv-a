@@ -168,11 +168,51 @@
   box-shadow: var(--shadow);
 }
 
+.location__map {
+  display: grid;
+}
+
 .location__map iframe {
   width: 100%;
   height: 100%;
   min-height: inherit;
   border: 0;
+}
+
+.map-placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.map-placeholder__pin {
+  width: 48px;
+  height: 48px;
+  fill: var(--color-primary);
+}
+
+.map-placeholder__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.map-placeholder__button {
+  margin-top: var(--space-3);
+}
+
+.map-placeholder__note {
+  font-size: var(--text-sm);
+}
+
+/* Without JavaScript the <noscript> iframe is shown instead */
+html:not(.js) .map-placeholder {
+  display: none;
 }
 
 /* Contact ----------------------------------------------------------------- */

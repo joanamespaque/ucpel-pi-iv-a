@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Security: GitHub Pages does not allow custom HTTP headers, so the
+       Content Security Policy is declared here. Only same-origin files run;
+       the inline script below is allowed by its hash, and the map iframe
+       may only come from Google. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Semana Tecnológica UCPel 2026 | 20 a 22 de outubro</title>
   <meta name="description" content="Semana Tecnológica UCPel 2026: três dias de palestras, oficinas práticas e networking com profissionais de tecnologia, de 20 a 22 de outubro, no Campus I da UCPel, em Pelotas.">
   <meta name="theme-color" content="#0b3a6e">
@@ -17,10 +23,11 @@
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600;700&amp;display=swap">
+  <!-- Fonts used above the fold: fetched in parallel with the CSS -->
+  <link rel="preload" href="assets/fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 
+  <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/base.css">
@@ -28,6 +35,7 @@
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
 
+  <!-- Marks that JavaScript is available (hash listed in the CSP above) -->
   <script>document.documentElement.classList.add('js');</script>
   <script type="module" src="assets/js/main.js"></script>
 </head>
@@ -70,7 +78,7 @@
       <div class="slideshow">
         <div class="slideshow__track" aria-live="off">
           <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 de 3">
-            <img class="slide__image" src="assets/img/slides/slide-1.svg" alt="Ilustração de um chip com o número 26 cercado por circuitos, representando a edição 2026 do evento" width="1600" height="900" loading="eager">
+            <img class="slide__image" src="assets/img/slides/slide-1.svg" alt="Ilustração de um chip com o número 26 cercado por circuitos, representando a edição 2026 do evento" width="1600" height="900" loading="eager" fetchpriority="high">
             <div class="container slide__content">
               <p class="slide__eyebrow">20 a 22 de outubro de 2026 · Campus I · Pelotas</p>
               <h1 class="slide__title">Semana Tecnológica UCPel 2026</h1>
@@ -247,13 +255,26 @@
           <p>As palestras acontecem no Auditório Dom Antônio Zattera e as oficinas nos laboratórios de informática do Campus I.</p>
           <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Universidade+Cat%C3%B3lica+de+Pelotas+Rua+Gon%C3%A7alves+Chaves+373" target="_blank" rel="noopener">Abrir no Google Maps</a>
         </div>
-        <div class="location__map">
-          <iframe
-            src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
-            title="Mapa com a localização do Campus I da UCPel"
-            width="600" height="400" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen></iframe>
+        <!-- The Google Maps iframe is only loaded on request: it brings third-party
+             cookies and ~100 KB of scripts that would slow down the first visit. -->
+        <div class="location__map" data-map
+          data-map-src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
+          data-map-title="Mapa com a localização do Campus I da UCPel">
+          <div class="map-placeholder">
+            <svg class="map-placeholder__pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            <p class="map-placeholder__title">Campus I da UCPel</p>
+            <p>Rua Gonçalves Chaves, 373 — Centro, Pelotas/RS</p>
+            <button class="btn btn--primary map-placeholder__button" type="button" data-map-load>Carregar mapa interativo</button>
+            <p class="map-placeholder__note">O mapa é fornecido pelo Google, que pode usar cookies.</p>
+          </div>
+          <noscript>
+            <iframe
+              src="https://www.google.com/maps?q=Universidade+Cat%C3%B3lica+de+Pelotas,+Rua+Gon%C3%A7alves+Chaves,+373,+Pelotas&amp;output=embed"
+              title="Mapa com a localização do Campus I da UCPel"
+              width="600" height="400" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </noscript>
         </div>
       </div>
     </section>

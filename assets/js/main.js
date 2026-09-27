@@ -14,6 +14,7 @@ import { initNav } from './nav.js';
 import { initSlideshow } from './slideshow.js';
 import { initSchedule } from './schedule.js';
 import { initForm } from './form.js';
+import { initMap } from './map.js';
 
 renderSummary(event, document.querySelector('[data-event-summary]'));
 renderStats(event, document.querySelector('[data-event-stats]'));
@@ -30,3 +31,4 @@ initNav();
 initSlideshow();
 initSchedule();
 initForm();
+initMap();

@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Security: GitHub Pages does not allow custom HTTP headers, so the
+       Content Security Policy is declared here. Only same-origin files run;
+       the inline script below is allowed by its hash, and the map iframe
+       may only come from Google. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Semana Tecnológica UCPel 2026 | 20 a 22 de outubro</title>
   <meta name="description" content="Semana Tecnológica UCPel 2026: três dias de palestras, oficinas práticas e networking com profissionais de tecnologia, de 20 a 22 de outubro, no Campus I da UCPel, em Pelotas.">
   <meta name="theme-color" content="#0b3a6e">
@@ -29,6 +35,7 @@
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
 
+  <!-- Marks that JavaScript is available (hash listed in the CSP above) -->
   <script>document.documentElement.classList.add('js');</script>
   <script type="module" src="assets/js/main.js"></script>
 </head>
